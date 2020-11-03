@@ -1,4 +1,5 @@
 import requests
+from urllib.parse import urlencode
 
 # declaration of global variables
 api_key = ""
