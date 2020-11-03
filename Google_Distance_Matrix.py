@@ -12,6 +12,20 @@ d_Matrix_url = "https://maps.googleapis.com/maps/api/distancematrix/json?units=i
 geocode_url = "https://maps.googleapis.com/maps/api/geocode/json?"
 
 
+# input: address_or_postalcode, data_type
+# output: returns a distance measured in meters.
+# This method send API request to Google Maps in order to find the distance between a user's address, and the Sacramento State campus.
+def extract_distance(address, data_type = 'json'):
+    destination = "6000 J St, Sacramento, CA"
+    endpoint = f"https://maps.googleapis.com/maps/api/directions/{data_type}"
+    params = {"origin" : address,
+              "destination" : destination,
+              "key": api_key}
+    url_params = urlencode(params)
+    url = f"{endpoint}?{url_params}"
+    r = requests.get(url)
+    return (r.json()["routes"][0]["legs"][0]["distance"]["value"])
+
 # input: home, parking_lot, and my Api key
 # output: returns the time in seconds of how long it would take to travel from home to parking_lot in best guess.
 # This method will calculate time for biking from home to parking_lot.
@@ -83,6 +97,8 @@ home = check_address()
 parking_lot = input("Enter the Parking lot you are going to:\n")
 option = input("Please enter your mode of transportation: \n(Bike, Bus, Light "
                "Rail, Walking, and Driving are the options available.)\n")
+distance = extract_distance(home)
+
 # declaration of try_again is used to validate the lower while loop.
 try_again = True
 # This while loop will check to make sure the user inputs a valid route option.
