@@ -92,34 +92,35 @@ def walking_route():
     time = r.json()["rows"][0]["elements"][0]["duration"]["value"]
     return time
 
+def get_travel_time_and_distance():
+    home = check_address()
+    parking_lot = input("Enter the Parking lot you are going to:\n")
+    option = input("Please enter your mode of transportation: \n(Bike, Bus, Light "
+                "Rail, Walking, and Driving are the options available.)\n")
+    distance = extract_distance(home, parking_lot)
+    # declaration of try_again is used to validate the lower while loop.
+    try_again = True
+    # This while loop will check to make sure the user inputs a valid route option.
+    # After confirming a valid route option it will store the travel time into the travel_time variable.
+    while try_again:
+        if option.lower() == "bike":
+            travel_time = bicycling_route(home, parking_lot)
+            try_again = False
+        elif option.lower() == "bus":
+            travel_time = bus_route(home, parking_lot)
+            try_again = False
+        elif option.lower() == "driving":
+            travel_time = driving_route(home, parking_lot)
+            try_again = False
+        elif option.lower() == "light rail":
+            travel_time = rail_route(home, parking_lot)
+            try_again = False
+        elif option.lower() == "walking":
+            travel_time = walking_route(home, parking_lot)
+            try_again = False
+        else:
+            print("\nSorry that is an invalid option please try again.")
+            option = input("Options again are only Bike, Bus, Light Rail, Walking,"
+                        " and Driving.\n")
 
-home = check_address()
-parking_lot = input("Enter the Parking lot you are going to:\n")
-option = input("Please enter your mode of transportation: \n(Bike, Bus, Light "
-               "Rail, Walking, and Driving are the options available.)\n")
-distance = extract_distance(home)
-
-# declaration of try_again is used to validate the lower while loop.
-try_again = True
-# This while loop will check to make sure the user inputs a valid route option.
-# After confirming a valid route option it will store the travel time into the travel_time variable.
-while try_again:
-    if option.lower() == "bike":
-        travel_time = bicycling_route()
-        try_again = False
-    elif option.lower() == "bus":
-        travel_time = bus_route()
-        try_again = False
-    elif option.lower() == "driving":
-        travel_time = driving_route()
-        try_again = False
-    elif option.lower() == "light rail":
-        travel_time = rail_route()
-        try_again = False
-    elif option.lower() == "walking":
-        travel_time = walking_route()
-        try_again = False
-    else:
-        print("\nSorry that is an invalid option please try again.")
-        option = input("Options again are only Bike, Bus, Light Rail, Walking,"
-                       " and Driving.\n")
+    return distance, travel_time, option
