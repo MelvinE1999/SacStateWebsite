@@ -68,7 +68,7 @@ def calc_bicycle_emissions(dist):
 # Calculates the costs of driving a personal vehicle to campus
 # TODO: Input validation to ensure the number that is entered is not less than 0 or is a non-numerical value.
 def output_vehicle_costs():
-    monthly_vehicle_payment = int(input("Enter your monthly car payment: "))
+    monthly_vehicle_payment = int(input("Enter your monthly vehicle payment: "))
     monthly_insurance = int(input("Enter your monthly insurance payment: "))
     monthly_gas = int(input("Enter your monthly gas expenditures: "))
 
