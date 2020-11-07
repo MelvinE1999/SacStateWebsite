@@ -1,6 +1,3 @@
-# Rishi Verma
-# CSC131 - Section 02
-
 # TODO: problems may occur when trying to access calculations such as emissions, time, costs outside of their
 #  respective functions. This will be important when determining the best possible route for a student.
 #  This is something I will fix/figure out later.
@@ -12,6 +9,7 @@ average_motorcycle_mpg = 44
 
 
 # TODO: Convert time that is above 60 minutes into a format of "__hrs and __minutes" for all time functions
+# Outputs the travel time when driving with your own vehicle.
 def output_vehicle_travel_time(time):
     time = int(time / 60)  # Converts the time provided by the Google API from seconds to minutes
     print("Travelling to campus by car/motorcycle would take about " + str(time) + " minutes. ")
@@ -20,11 +18,13 @@ def output_vehicle_travel_time(time):
           "\nconditions during different times of the day.")
 
 
+# Outputs travel time when taking the bus.
 def output_bus_travel_time(time):
     time = int(time / 60)
     print("Travelling to campus by a bus would take about " + str(time) + " minutes. ")
 
 
+# Outputs travel time for riding a bike.
 def output_biking_travel_time(time):
     time = int(time / 60)
     print("Travelling to campus by a bike would take about " + str(time) + " minutes. ")
