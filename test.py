@@ -11,5 +11,6 @@ calcs.calc_bus_emissions(distance)
 print()
 calcs.calc_motorcycle_emissions(distance)
 print()
+calcs.calc_bicycle_emissions(distance)
 
 calcs.output_vehicle_costs()

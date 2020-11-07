@@ -55,6 +55,16 @@ def calc_motorcycle_emissions(dist):
           + str(emissions) + " pounds of CO2.")
 
 
+# Calculates the carbon footprint of bicycling.
+def calc_bicycle_emissions(dist):
+      emissions = int(26 * dist) / 454
+      print("Although it may come as a surprise, bicycling does leave a carbon footprint as well. The CO2 emissions of"
+            "\nbicycling depend on your diet. A diet that is reliant on meat will leave a higher carbon footprint"
+            "\n(about 16g of CO2 for every km, which is about 26g per mile). Once again, this will vary depending"
+            "\non the kinds of foods you eat.")
+      print("\nFor your route, your carbon footprint from bicycling is about " + str(emissions) + " pounds of CO2.")
+
+
 # Calculates the costs of driving a personal vehicle to campus
 # TODO: Input validation to ensure the number that is entered is not less than 0 or is a non-numerical value.
 def output_vehicle_costs():
