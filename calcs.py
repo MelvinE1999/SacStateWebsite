@@ -62,6 +62,7 @@ def calc_bicycle_emissions(dist):
             "\nbicycling depend on your diet. A diet that is reliant on meat will leave a higher carbon footprint"
             "\n(about 16g of CO2 for every km, which is about 26g per mile). Once again, this will vary depending"
             "\non the kinds of foods you eat.")
+
       print("\nFor your route, your carbon footprint from bicycling is about " + str(emissions) + " pounds of CO2.")
 
 
@@ -93,15 +94,18 @@ def output_vehicle_costs():
 def output_transit_costs():
       print("Traveling by bus or lightrail through Sacramento Regional Transit is already covered through your tuition fees as a"
             "\nSac State student. There are no additional fees. All you have to do is pick up a commuter sleeve from the"
-            "\nBursar's Office or the UTAPS Office on campus. Another cost to consider is time, since transit can take almost"
-            "\ntwice as long to reach your destination as it would to drive there with your own vehicle. This is because transits"
-            "\nfollow set routes and make multiple stops on the way.")
+            "\nBursar's Office or the UTAPS Office on campus.")
+
+      print("\nAnother cost to consider is time, since transit can take almost twice as long to reach your destination as it would to"
+            "\ndrive there with your own vehicle. This is because transits follow set routes and make multiple stops on the way.")
 
 
 # Outputs the costs of biking to campus.
 def output_biking_costs():
       print("The cost of a bicycle can start as low as $100 and can go higher than $1,000. It depends on the type of bicycle,"
             "\nits condition (new, used, etc.), where you buy it from, and additional warranties. It's also important to take"
-            "\nmaintenance into account. Maintenance fees will vary based on the kind of bike you ride, how you treat the bike,"
+            "\nmaintenance into account.")
+
+      print("\nMaintenance fees will vary based on the kind of bike you ride, how you treat the bike,"
             "\nwhether you get it serviced from a shop or DIY it, and more. However, you do save lots of money that would otherwise"
             "\nbe spent on gas.")
