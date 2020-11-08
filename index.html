@@ -31,7 +31,7 @@
       </style> 
     </head>
     <body>
- <script src="https://maps.googleapis.com/maps/api/js?signed_in=true&callback=initMap&key=AAIzaSyD_OmfV6R80tXkuh-BgApuG8XjXILmrkrw"    
+ <script src="https://maps.googleapis.com/maps/api/js?signed_in=true&callback=initMap&key=AAIzaSyD_OmfV6R80tXkuh-BgApuG8XjXILmrkrw"    //Google API here
         async defer></script>    
 <script>
 var map;
@@ -74,15 +74,15 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay) {
 
 function showSteps(directionResult) {
   var myRoute = directionResult.routes[0].legs[0];
-  var instructions = '<h3 class="distance">distance: ' + myRoute.distance.text + '</h3><br>';
-  instructions += '<h5 class="duration">Time: ' + myRoute.duration.text + '</h5>';
+  var instructions = '<h3 class="distance">distance: ' + myRoute.distance.text + '</h3><br>'; //Variables for distance
+  instructions += '<h5 class="duration">Time: ' + myRoute.duration.text + '</h5>'; //variable for time
   instructions += '<h5 class="start_address">From: ' + myRoute.start_address + '</h5>';
   instructions += '<h5 class="end_address">To: ' + myRoute.end_address + '</h5>';
   instructions += '<ol>';
   var steps = '';
 
   for (var i = 0; i < myRoute.steps.length; i++) {
-      steps += '<li>' + myRoute.steps[i].instructions + '</li>';
+      steps += '<li>' + myRoute.steps[i].instructions + '</li>'; //steps of directions
   }
   instructions += '<p class="steps">'+ steps +'</p>';
   instructions += '</ol>';
