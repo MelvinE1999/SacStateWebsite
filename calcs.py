@@ -65,8 +65,8 @@ def calc_bicycle_emissions(dist):
       print("\nFor your route, your carbon footprint from bicycling is about " + str(emissions) + " pounds of CO2.")
 
 
-# Calculates the costs of driving a personal vehicle to campus
 # TODO: Input validation to ensure the number that is entered is not less than 0 or is a non-numerical value.
+# Calculates the costs of driving a personal vehicle to campus.
 def output_vehicle_costs():
     monthly_vehicle_payment = int(input("Enter your monthly vehicle payment: "))
     monthly_insurance = int(input("Enter your monthly insurance payment: "))
@@ -89,6 +89,7 @@ def output_vehicle_costs():
           "\nrequire you to coordinate your schedule with theirs.")
 
 
+# Outputs the costs of using Sacramento Regional Transit (SacRT) to commute to campus.
 def output_transit_costs():
       print("Traveling by bus or lightrail through Sacramento Regional Transit is already covered through your tuition fees as a"
             "\nSac State student. There are no additional fees. All you have to do is pick up a commuter sleeve from the"
@@ -97,6 +98,7 @@ def output_transit_costs():
             "\nfollow set routes and make multiple stops on the way.")
 
 
+# Outputs the costs of biking to campus.
 def output_biking_costs():
       print("The cost of a bicycle can start as low as $100 and can go higher than $1,000. It depends on the type of bicycle,"
             "\nits condition (new, used, etc.), where you buy it from, and additional warranties. It's also important to take"
