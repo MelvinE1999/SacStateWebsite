@@ -1,0 +1,127 @@
+
+  
+ <!DOCTYPE html>
+<html>
+    <head>
+      <title>Google Map Demo</title>
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+      <style>    
+        html, body {    
+          height: 100%;    
+          margin: 0;    
+          padding: 0;    
+        }    
+        #map {    
+         height: 500px;
+         width: 100%;  
+       }    
+      #panel {    
+        position: absolute;    
+        top: 0px;    
+        left: 25%;    
+        z-index: 5;    
+        background-color: #fff;    
+        padding: 0px;    
+        border: 1px solid #999;    
+        text-align: center;    
+        font-family: 'Roboto','sans-serif';    
+        line-height: 0px;    
+        padding-left: 10px;    
+      }    
+      </style> 
+    </head>
+    <body>
+ <script src="https://maps.googleapis.com/maps/api/js?signed_in=true&callback=initMap&key=AAIzaSyD_OmfV6R80tXkuh-BgApuG8XjXILmrkrw"    
+        async defer></script>    
+<script>
+var map;
+var directionsDisplay;
+var directionsService;
+var stepDisplay;
+var markerArray = [];
+
+function initMap() {  
+  var lat_lng = {lat: 37.335480, lng: -121.8930285};  
+  map = new google.maps.Map(document.getElementById('map'), {    
+    zoom: 12,    
+    center: lat_lng    
+  });
+  directionsService = new google.maps.DirectionsService();    
+  directionsDisplay = new google.maps.DirectionsRenderer({map: map});
+    
+  var onChangeHandler = function() {    
+    calculateAndDisplayRoute(directionsService, directionsDisplay);    
+  };    
+  document.getElementById('source').addEventListener('change', onChangeHandler);    
+  document.getElementById('destination').addEventListener('change', onChangeHandler);    
+  document.getElementById('mode').addEventListener('change', onChangeHandler);    
+}    
+    
+function calculateAndDisplayRoute(directionsService, directionsDisplay) {    
+  directionsService.route({    
+    origin: document.getElementById('source').value,    
+    destination: document.getElementById('destination').value,    
+    travelMode: document.getElementById('mode').value,     
+  }, function(response, status) {    
+    if (status === google.maps.DirectionsStatus.OK) {
+      directionsDisplay.setDirections(response);
+      showSteps(response);
+    } else {    
+      window.alert('Request for getting direction is failed due to ' + status);    
+    }    
+  });    
+}    
+
+function showSteps(directionResult) {
+  var myRoute = directionResult.routes[0].legs[0];
+  var instructions = '<h3 class="distance">distance: ' + myRoute.distance.text + '</h3><br>';
+  instructions += '<h5 class="duration">Time: ' + myRoute.duration.text + '</h5>';
+  instructions += '<h5 class="start_address">From: ' + myRoute.start_address + '</h5>';
+  instructions += '<h5 class="end_address">To: ' + myRoute.end_address + '</h5>';
+  instructions += '<ol>';
+  var steps = '';
+
+  for (var i = 0; i < myRoute.steps.length; i++) {
+      steps += '<li>' + myRoute.steps[i].instructions + '</li>';
+  }
+  instructions += '<p class="steps">'+ steps +'</p>';
+  instructions += '</ol>';
+  document.getElementById("instructions").innerHTML = instructions;
+}
+
+function attachInstructionText(marker, text) {
+  google.maps.event.addListener(marker, 'click', function() {
+    stepDisplay.setContent(text);
+    stepDisplay.open(map, marker);
+  });
+}
+  </script> 
+     <div id="panel">    
+    <b>From: </b>    
+    <select id="source">    
+      <option value="San Jose">San Jose</option>  
+      <option value="Palo Ato">Palo Ato</option>         
+    </select>    
+    <b>to: </b>    
+    <select id="destination">    
+      <option value="Livemore">Livemore</option>    
+      <option value="Stocton">Stocton</option>           
+    </select>   
+    <b>Vihicle: </b>    
+    <select id="mode">
+      <option value="DRIVING">DRIVING</option>
+      <option value="WALKING">WALKING</option>
+      <option value="BICYCLING">BICYCLING</option>
+      <option value="TRANSIT">TRANSIT</option>
+    </select>
+    </div>   
+    </div>    
+
+    <div id="warnings"></div>    
+    <div id="instructions"></div>    
+    <div id="map"></div>    
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+</html>
