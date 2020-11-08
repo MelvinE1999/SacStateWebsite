@@ -16,6 +16,6 @@ print()
 
 calcs.output_vehicle_costs()
 print()
-calcs.output_bus_lightrail_costs()
+calcs.output_transit_costs()
 print()
 calcs.output_biking_costs()

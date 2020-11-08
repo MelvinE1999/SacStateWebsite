@@ -89,7 +89,7 @@ def output_vehicle_costs():
           "\nrequire you to coordinate your schedule with theirs.")
 
 
-def output_bus_lightrail_costs():
+def output_transit_costs():
       print("Traveling by bus or lightrail through Sacramento Regional Transit is already covered through your tuition fees as a"
             "\nSac State student. There are no additional fees. All you have to do is pick up a commuter sleeve from the"
             "\nBursar's Office or the UTAPS Office on campus. Another cost to consider is time, since transit can take almost"
