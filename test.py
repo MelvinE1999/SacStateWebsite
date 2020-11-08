@@ -15,3 +15,5 @@ calcs.calc_bicycle_emissions(distance)
 print()
 
 calcs.output_vehicle_costs()
+print()
+calcs.output_bus_lightrail_costs()
