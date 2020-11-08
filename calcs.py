@@ -93,3 +93,11 @@ def output_bus_lightrail_costs():
       print("Traveling by bus or lightrail through Sacramento Regional Transit is already covered through your tuition fees as a"
             "\nSac State student. There are no additional fees. All you have to do is pick up a commuter sleeve from the"
             "\nBursar's Office or the UTAPS Office on campus.")
+
+
+def output_biking_costs():
+      print("The cost of a bicycle can start as low as $100 and can go higher than $1,000. It depends on the type of bicycle,"
+            "\nits condition (new, used, etc.), where you buy it from, and additional warranties. It's also important to take"
+            "\nmaintenance into account. Maintenance fees will vary based on the kind of bike you ride, how you treat the bike,"
+            "\nwhether you get it serviced from a shop or DIY it, and more. However, you do save lots of money that would otherwise"
+            "\nbe spent on gas.")
