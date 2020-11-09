@@ -1,0 +1,50 @@
+  {% extends "layout.html" %}
+{% block content %}
+  <!-- T4 Quadrants -->
+  <h1 aria-hidden="true" class="d-none" id="quadrants-header">About Visitor Information</h1>
+  <div aria-labelledby="quadrants-header" class="row no-gutters" id="quadrants" style="height:100%;">
+
+
+    
+  <!-- Quadrant: Top Left -->
+  <div class="col-md-6">
+    <div class="box1">
+      <h2 id="visitor-information-generic-quadrant1" title="Anchor is: visitor-information-generic-quadrant1">Welcome Studnets!</h2>                                    
+      <p>Commuting to campus can be a very stressful experience for many new stuents. Traffic, car problems, and parking are some of the many obstacles students may face on a daily basis when choosing to commute to campus in single occupant cars.</p>
+      <p>Our goal is to inform students about other options avaiable to them in order to decide whether or not commuting to campus in single occupant cars is the best choice for them.</p>       
+    </div>
+  </div>
+
+  <!-- Quadrant: Top Right -->
+  <div class="col-md-6">                         
+    <div class="box2 button">    
+      <div class="side-nav">
+        <h2 id="information-for-visitors-button-list-quadrant2" title="Anchor is: information-for-visitors-button-list-quadrant2">Information for Students</h2>    
+          <ul>
+            <li><a href="https://www.csus.edu/campusmap/" target="_blank">Campus Map</a></li>
+            <li><a href="event-parking.html">Events Parking Main Campus</a></li>
+            <li><a href="sac-state-downtown-parking.html">Sacramento State Downtown</a></li>
+          </ul>      
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Quadrant: Bottom Left -->
+<div class="col-md-6">  
+  <div class="box3 general">
+    <h2 id="parking-permits-generic-quadrant3" title="Anchor is: parking-permits-generic-quadrant3">Lets Get Started!</h2>
+    <p>To get started in helping students make better decisions on commuting to campus, we've created a small presentation that gives a detail analysis of each commuting option. Once completeing the presentation, you'll be propmpted to fill out a quick servey. To begin, click on the button bellow! </p> 
+    <a class="btn btn-primary" href="{{ url_for('driving') }}" role="button">Go</a>
+  </div>
+</div>
+
+  <!-- Quadrant: Bottom Right -->
+<div class="col-md-6">         
+    <div class="box4 general">
+      <h2 id="department-resources-generic-quadrant4" title="Anchor is: department-resources-generic-quadrant4">Department Resources</h2>                                      
+      <p>If you need additional information, please visit the <strong>Sacramento State Visitor Information Center</strong> in Sacramento Hall which is normally staffed Monday – Friday, 8 a.m. – 5 p.m.</p>
+      <p><strong>Visitor Information Booth</strong> is located on College Town Drive near the Alumni Center and is normally staffed Monday-Friday, 8 a.m. - 5 p.m.</p>          
+    </div>
+</div>
+{% endblock content %}
