@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="container">
+<h2> Survey</h2>
+<h3>We will not store your address it is ust used to give directions.</h3>
+<form action="" method="post">
+    <p>
+        {{form.q1.label}}<br>
+        {{form.q1(size=30)}}
+    </p>
+    <p>
+        {{form.q2.label}}<br>
+        {{form.q2(size=4)}}
+    </p>
+    <p>
+        {{form.q3.label}}<br>
+        {{form.q3(size=10)}}
+    </p>
+    <p>
+        {{form.q4.label}}<br>
+        {{form.q4(size=10)}}
+    </p>
+    <p>
+        {{form.q5.label}}<br>
+        {{form.q5(size=30)}}
+    </p>
+    <p>
+        {{form.submit()}}
+    </p>
+</form>
+</div>
+{% endblock %}
