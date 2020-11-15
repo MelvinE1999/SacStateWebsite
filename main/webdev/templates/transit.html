@@ -1,8 +1,104 @@
 {% extends "layout.html" %}
 {% block content %}
 
-<div class="container">
+<header class="bg-image-full">   
+  <style>
+    /* Large devices (laptops/desktops, 992px and up) */
+    @media only screen and (min-width: 992px) {
+        .bg-image-full {
+            background-image: linear-gradient(270deg, rgba(196,182,129,0) 50%, rgba(0,78,56,0.6) 50%, rgba(0,78,56,1) 100%), url("{{ url_for('static', filename='images/bus2.jpg') }}"); 
+            background-size: cover;
+        }
+        /* exception for initial campaign page (give / campaign / index ) */
+        main.page-campaign .bg-image-full {
+            background-color: #fff;
+            background-position: center;
+            background-image: url("{{ url_for('static', filename='images/bus2.jpg') }}"); 
+            background-size: cover;
+        }
+    }
+    </style>
 
+    <style>
+      /* Small devices (991px and down) */
+      @media only screen and (max-width: 991px) {
+          main:not(.t1) .bg-image-full {
+               background-image: linear-gradient(270deg, rgba(0,78,56,0.3) 5%, rgba(0,78,56,.6) 100%), url("{{ url_for('static', filename='images/bus2.jpg') }}"); 
+          }
+          main.t1 .bg-image-full {
+               background-image: url("{{ url_for('static', filename='images/bus2.jpg') }}"); 
+          }
+      }
+      </style>     
+        <div class="container">
+          <div class="row">
+                <!-- T4 Hero Header --> 
+            <div class="col-lg-6">
+              <h1>            Alternative Transportation</h1>
+              <h2>Parking &amp; Transportation</h2>
+            </div>
+          </div>
+        </div>
+      </header>
+
+<!-- T4 Quadrants -->
+<div class="container">
+  <!-- Body Header -->
+  <h1 style="margin-top:0.70em">General Information</h1>
+  <hr>
+  <p><h5>The City of Sacramento offers the Regional Transit for those who are looking for other forms transportation. 
+          Two forms of transportation SacRT currently offers to the Sac State campus are bus and light rail. With a 
+          purchase of a commuter sleeve, students can use the bus or light rail to commute to campus for free.</h5></p>
+  <p><h5>The following table provides more information on costs, and run times (as well as sustainanility factors) for
+         for both forms of transportation.</h5></p>
+  <h1 style="margin-top:0.70em">Informational Table</h1>
+  <hr>
+  <!-- Table -->
+    <table class="table table-borderless">
+      <tbody>
+        <tr>
+          <td style="width: 30%"></th>
+          <td style="width: 35%"><h2>Bus</h2></td>
+          <td><h2>Light Rail</h2></td>
+        </tr>
+        <tr>
+          <td style="width: 30%"><h3>Number of Routes</h3></th>
+          <td style="width: 35%"><h4>5</h4></td>
+          <td><h4>1</h4></td>
+        </tr>
+        <tr>
+          <td style="width: 30%"><h3>Route(s) to Sac State</h3></th>
+          <td style="width: 35%"><h4>26, 30, 81, 82, 87</h4></td>
+          <td><h4>Gold</h4></td>
+        </tr>
+        <tr>
+          <td style="width: 30%"><h3>Average Run Times</h3></th>
+          <td style="width: 35%"><h4>~58 mins</h4></td>
+          <td><h4>~16 mins</h4></td>
+        </tr>
+        <tr>
+          <td style="width: 30%"><h3>Availability</h3></th>
+          <td style="width: 35%"><h4>Mon-Fri 6am-10pm</h4></td>
+          <td><h4>Mon-Fri 6am-10pm</h4></td>
+        </tr>
+        <tr>
+          <td style="width: 30%"><h3>Commuter Sleeve Cost</h3></th>
+          <td style="width: 35%"><h4>$40</h4></td>
+          <td><h4>$40</h4></td>
+        </tr>
+        <tr>
+          <td style="width: 30%"><h3>Single/Daily Ride Cost</h3></th>
+          <td style="width: 35%"><h4>$2.50 or $7</h4></td>
+          <td><h4>$2.50 or $7</h4></td>
+        </tr>
+        <tr>
+          <td style="width: 30%"><h3>CO2 Emissions</h3></th>
+          <td style="width: 35%"><h4>~37,030g per 30mi</h4></td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+  <!-- End of Table -->
 </div>
 
 {% endblock %}
