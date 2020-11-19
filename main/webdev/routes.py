@@ -58,21 +58,35 @@ def driving():
 #input: on this page the user will have to fill out the 5Q survey
 #output: The data from question 1 will be used to calculate routes
 #        The rest will just be sent to a database as set by client
-@app.route('/survey', methods=['GET', 'POST'])
+@app.route("/survey", methods=["GET", "POST"])
 def survey():
-    form = Survey()
-    if form.is_submitted():
-        result = request.form
+    if request.method == "POST":
+        req = request.form
+
+        missing = list()
+
+        #doesnt provide feedback if missing checkbox
+        for k, v in req.items():
+            if v == "" or v == "Choose...":
+                missing.append(k)
+
+        if missing:
+            feedback = f"Missing fields for {', '.join(missing)}"
+            return render_template("/survey.html", feedback=feedback)
+
+        answer1 = request.form.get("answer1")
+        answer2 = request.form.get("Q1Box1")
+        answer3 = request.form.get("Select1")
+
+
         file = open("data.txt", "w+")
-        #this will print the dat to a file
-        #the file only keeps the most recent user's data for now
-        #in the file y means yes and n means no
-        #1-4 on the file corelates to the year they are fresman-Senior
-        #for now there is no data validation for the submission. That will be added if needed
-        for key,value in result.items():
-            file.write("answer to  " + str(key) + "= " + str(value) + "\n" )
+        file.write("\nanswer1 " + answer1 + "\nanswer2: " + answer2 + "\nanswer3: " + answer3 + "\n")
+
         file.close()
-    return  render_template('survey.html', form=form)
+
+        return redirect(request.url)
+
+    return render_template("/survey.html")
 
 
 #needed to setup the website
