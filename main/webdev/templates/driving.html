@@ -91,7 +91,7 @@
 						<tr>
 							<td>CO2 Emissions</td>
 							<td class="text-center"> 10,664.4 g/ 30mi</td>
-							<td class="text-center"> 0</td>
+							<td class="text-center"> 0 (^)</td>
 						</tr>	
 					</tbody>
 				</table>
@@ -100,7 +100,7 @@
 				  ** Average Cost of Insurance:   <a href="https://www.myev.com/research/buyers-sellers-advice/5-cheapest-evs-to-insure-for-2018#:~:text=About%20average%2C%20according%20to%20a,among%20all%20vehicles%20at%20%241%2C645."> Click here</a>
 				  <br>*** Maintenance fee:   <a href="https://www.motor1.com/reviews/406938/tesla-maintenance-cost/"> Click here</a></br>
 				  **** Cost:   <a href="https://www.solarreviews.com/blog/how-much-does-it-cost-to-charge-a-tesla-is-it-the-same-as-the-cost-to-charge-other-electric-vehicles"> Click here</a>
-				
+				<br>(^) There are no associated tailpipe emissions with an electric vehicle, but there are vehicle emissions when the vehicle production process is considered.</br>
 				</div>
 		</div>
 	</div>
@@ -161,11 +161,11 @@
 		function drawChart() {
 		  var data = google.visualization.arrayToDataTable([
 		  ['Duration', 'Percentage'],
-		  ['0 < 30 mins',     62.7],
-		  ['30 - 45 mins',      20.0],
-		  ['45 - 60 mins',  8.1],
-		  ['Over 60 mins',    9.3]
-			  ]);
+          ['0 < 30 mins',     62.7],
+          ['30 - 45 mins',      20.0],
+          ['45 - 60 mins',  8.1],
+          ['Over 60 mins',    9.3]
+		  ]);
   
 		  var options = {
 			title: 'Average One-Way Commute Times 2019'
@@ -215,17 +215,17 @@
   </script>	
 	
 <style>
-td {
-	max-width: 0;
-	overflow: hidden;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-}
-#buttoncenter {
-	text-align: center;
-	display: block;
-	margin: 0 auto;
-}	
+	td {
+			max-width: 0;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+		}
+	#buttoncenter {
+			text-align: center;
+			display: block;
+			margin: 0 auto;
+		}	
 
 </style>
 
