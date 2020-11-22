@@ -3,9 +3,6 @@ from urllib.parse import urlencode
 
 # declaration of global variables
 api_key = ""
-home = ""
-parking_lot = ""
-option = ""
 # Api url for Google Distance Matrix Api
 d_Matrix_url = "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&"
 # Api url for Google Geocoding Api. Used to validate address.
@@ -29,7 +26,7 @@ def extract_distance(address, destination, data_type = 'json'):
 # output: returns the time in seconds of how long it would take to travel from home to parking_lot in best guess.
 # This method will calculate time for biking from home to parking_lot.
 # Calculated by Google Api.
-def bicycling_route():
+def bicycling_route(home, destination):
     r = requests.get(d_Matrix_url + "origins=" + home + "&destinations=" + parking_lot +
                      "&mode=bicycling" + "&key=" + api_key)
     time = r.json()["rows"][0]["elements"][0]["duration"]["value"]
@@ -40,7 +37,7 @@ def bicycling_route():
 # output: returns the time in seconds of how long it would take to travel from home to parking_lot in best guess.
 # This method will calculate time to take a bus from home to parking_lot.
 # Calculated by Google Api.
-def bus_route():
+def bus_route(home, destination):
     r = requests.get(d_Matrix_url + "origins=" + home + "&destinations=" + parking_lot +
                      "&mode=transit" + "&transit_mode=bus" + "&key=" + api_key)
     time = r.json()["rows"][0]["elements"][0]["duration"]["value"]
@@ -50,7 +47,7 @@ def bus_route():
 #output: This function will return a valid address to be used for calculations.
 #All this method does is check that there is somewhere in the US with the provided address.
 #Has a preference for the area from Placerville,CA to San Fransisco,CA.
-def check_address():
+def check_address(home, destination):
     home_check = input("Enter your home address\n")
     r = requests.get(geocode_url + "address=" + home_check + "&bound= 37.7749,122.4194|"
                              "38.7296,120.17985&components=country:US&key=" + api_key)
@@ -63,7 +60,7 @@ def check_address():
 # output: returns the time in seconds of how long it would take to travel from home to parking_lot in best guess.
 # This method will calculate time to drive from home to parking_lot.
 # Calculated by Google Api.
-def driving_route():
+def driving_route(home, destination):
     r = requests.get(d_Matrix_url + "origins=" + home + "&destinations=" + parking_lot +
                      "&mode=driving" + "&key=" + api_key)
     time = r.json()["rows"][0]["elements"][0]["duration"]["value"]
@@ -74,7 +71,7 @@ def driving_route():
 # output: returns the time in seconds of how long it would take to travel from home to parking_lot in best guess.
 # This method will calculate time to take the light rail,train, or subway from home to parking_lot.
 # Calculated by Google Api.
-def rail_route():
+def rail_route(home, destination):
     r = requests.get(d_Matrix_url + "origins=" + home + "&destinations=" + parking_lot +
                      "&mode=transit" + "&transit_mode=rail" + "&key=" + api_key)
     time = r.json()["rows"][0]["elements"][0]["duration"]["value"]
@@ -85,7 +82,7 @@ def rail_route():
 # output: returns the time in seconds of how long it would take to travel from home to parking_lot in best guess.
 # This method will calculate time to walk from home to parking_lot.
 # Calculated by Google Api.
-def walking_route():
+def walking_route(home, destination):
     r = requests.get(d_Matrix_url + "origins=" + home + "&destinations=" + parking_lot +
                      "&mode=bicycling" + "&key=" + api_key)
     time = r.json()["rows"][0]["elements"][0]["duration"]["value"]
