@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+		<title>Calculate Distance Between Two Locations(points) Using google maps javascript</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+		<script src="//maps.googleapis.com/maps/api/js?key=AIzaSyD_OmfV6R80tXkuh-BgApuG8XjXILmrkrw&sensor=false&libraries=places" type="text/javascript"></script>
+		
+	<style type="text/css">
+        body
+        {
+            font-family: Arial;
+            font-size: 10pt;
+        }
+		.scroller {
+		  width: 400px;
+		  height: 520px;
+		  overflow-y: scroll;
+		  scrollbar-width: none ;
+		}
+    </style>
+
+
+</head>
+<body>
+<div class="container">
+ <table border="0" cellpadding="0" cellspacing="3">
+		<td>
+			<p>  &nbsp;&nbsp;</p>
+		</td>
+        <tr>
+            <td colspan="2">
+				<div class="form-group col-md-6">
+					  <label for="email">Source:</label>
+					  <input type="text" class="form-control" id="source" style="witdh: 500px"  value="Stockton, CA" >
+				</div>
+				
+				<div class="form-group col-md-6">
+					  <label for="pwd">Destination:</label>
+					  <input type="text" class="form-control" id="destination" style="witdh: 500px" value="6000 J St, Sacramento, CA 95819" >
+				</div>
+            </td>
+        </tr>
+		
+		<tr>
+			 <td>
+				<div class="form-group col-md-6">
+					  <label for="pwd">Fuel Consumption (MPG):</label>
+					  <input id="gasConsumption" type="number" step="0.1" value= "25"> 
+				</div>
+				
+			</td>
+		</tr>
+		<tr>
+			<td>
+			<div class="form-group col-md-6">
+					  <label for="pwd">Fuel Price ($):</label>
+					  <input id="gasConsumption" type="number" step="0.1" value= "2.5"> 
+				</div>
+			</td>
+		</tr>
+    </table>
+	
+ <table border="0" cellpadding="0" cellspacing="3">
+	<tr>
+			<td colspan="2">
+				<div class="form-group col-md-6">
+				<button type="button" value="Get Route" onclick="get_rout()" style="width:200px">Get Rout & Distance</button>
+				</div>
+			</td>
+		</tr>
+ </table>
+ 
+ 
+ <table border="0" cellpadding="0" cellspacing="3">
+	<tr>
+		<td colspan="2">
+			<div id="dvDistance"> <!--This is Display Text result-->
+			</div>
+        </td>
+        </tr>
+        <tr>
+            <td>
+				 <div class='col-md-6' id='maplocation' style="width: 500px; height: 500px" ></div>
+            </td>
+			<td>
+				<p>  &nbsp;&nbsp;&nbsp;&nbsp;</p>
+			</td>
+            <td>
+               <div class = 'scroller' id='panallocation' ></div>
+            </td>
+	</tr>
+ </table>
+ 
+  <div class="row" >
+  <br /><br />
+   <div class='col-md-6' id='maplocation' style="width: 500px; height: 00px" ></div>
+   <div class='col-md-6' id='panallocation'  ></div>
+   <div class='col-md-6' id='gasConsumption' style="width:200px" ></div>
+ 
+  </div>
+</div>
+ 
+ 
+ 
+<script type="text/javascript">
+	var routeArr = [];
+	var globalResponse;
+	var source, destination;
+	var gas;
+	var price;
+	var darection = new google.maps.DirectionsRenderer;
+	var directionsService = new google.maps.DirectionsService;
+	google.maps.event.addDomListener(window, 'load', function () {
+		new google.maps.places.SearchBox(document.getElementById('source'));
+		new google.maps.places.SearchBox(document.getElementById('destination'));
+ 
+	});
+ 
+	function get_rout() {
+		var mapOptions = {
+			mapTypeControl: false,
+			center: {lat: -100.8688, lng: 151.2195},
+			zoom: 20
+		};
+ 
+		map = new google.maps.Map(document.getElementById('maplocation'), mapOptions);
+		darection.setMap(map);
+		darection.setPanel(document.getElementById('panallocation'));
+ 
+		//*********DIRECTIONS AND ROUTE**********************//
+		source = document.getElementById("source").value;
+		destination = document.getElementById("destination").value;
+ 
+		var request = {
+			origin: source,
+			destination: destination,
+			provideRouteAlternatives: true, //Options
+			travelMode: google.maps.TravelMode.DRIVING
+		};
+		directionsService.route(request, function (response, status) {
+			if (status == google.maps.DirectionsStatus.OK) {
+				for (var i = 0; i < response.routes.length; i++) {
+					darection.setDirections(response);
+					darection.setRouteIndex(i);
+					darection.setMap(map);
+				}
+				
+				globalResponse = response;
+                routeArr = [];
+                for(i=0;i<globalResponse.routes.length;i++){
+                    routeArr.push([globalResponse.routes[i].legs[0].distance.text, globalResponse.routes[i].legs[0].duration.text]);
+                }
+               var s = 'Possible routes are: <br />';
+			   var integer;
+                for(i = 0; i < routeArr.length; ++i){
+					integer = parseFloat(routeArr[i][0]);
+					gas = Math.round(integer/25,2);
+					price = Math.round(gas * 2.5,2);
+                    s += "    _ Option " + [i] +": "+ routeArr[i][0] + " with " + routeArr[i][1];
+					s += " - Gas Consumption: " + gas + " Gallons & spend $"+ price +"<br />";
+					
+                }
+
+                document.getElementById("dvDistance").innerHTML = s;
+                darection.setDirections(response);
+			}
+			
+	
+			
+			// Here's the AJAX request
+            var httpRequest;
+            if (window.XMLHttpRequest) { // Mozilla, Safari, IE7+ ...
+                httpRequest = new XMLHttpRequest();
+            } else if (window.ActiveXObject) { // IE 6 and older
+                httpRequest = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            httpRequest.onreadystatechange = function() {                           // here the function name that is designed to handle the response
+                if (httpRequest.readyState == 4 && httpRequest.status == 200) {          //200 OK response code. // 4 is complete response received
+                    alert(httpRequest.responseText);
+                }
+            };
+            //httpRequest.open("POST", "mapdb.php", true);       // here true means asynchronously server is called,i.e,without page reloading
+            httpRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            httpRequest.send("source=" + source + "&destination=" + destination + "&routes=" + JSON.stringify(routeArr));
+
+		});
+		
+		
+		//*********DISTANCE AND DURATION**********************//
+		var service = new google.maps.DistanceMatrixService();
+		service.getDistanceMatrix({
+			origins: [source],
+			destinations: [destination],
+			travelMode: google.maps.TravelMode.DRIVING,
+			unitSystem: google.maps.UnitSystem.METRIC,
+			avoidHighways: false,
+			avoidTolls: false
+		}, function (response, status) {
+			if (status == google.maps.DistanceMatrixStatus.OK && response.rows[0].elements[0].status != "ZERO_RESULTS") {
+				var distance = globalResponse.rows[0].elements[0].distance.text;    //  Distance Calculation From data provide by APIs
+                var duration = globalResponse.rows[0].elements[0].duration.text;      //  Duration Calculation From data provide by APIs
+                var distance = globalResponse.routes[0].legs[0].distance.text;
+                var duration = globalResponse.routes[0].legs[0].duration.text;
+                var dvDistance = document.getElementById("dvDistance");         // This Variable is for Fetching the Routes distance and displaying it on web page.
+               
+				dvDistance.innerHTML = "";
+                dvDistance.innerHTML += "Distance: " + distance+ "<br />";
+                dvDistance.innerHTML += "Duration:" + duration;
+				
+			} 
+		});
+	}
+</script>
+</body>
+</html>
