@@ -22,12 +22,60 @@
             <p>
                 The cost of a bicycle can start as low as $100 and can go higher than $1,000. It depends on the type of bicycle,
                 its condition (new, used, etc.), where you buy it from, and additional warranties. It's also important to take
-                maintenance into account.
+                maintenance into account. Mountain bikes cost more to maintain than regular road bikes.
             </p>
             <p>
                 Maintenance fees will vary based on the kind of bike you ride, how you treat the bike, whether you get it serviced
-                from a shop or DIY it, and more. However, you do save lots of money that would otherwise be spent on gas.
+                from a shop or DIY it, and more. However, you do save lots of money that would otherwise be spent on gas. Here is a
+                table that compares some estimated costs of maintenance for each kind of bicycle. 
             </p>
+            
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Maintenance Fees</th>
+                    <th scope="col">Road Bike</th>
+                    <th scope="col">Mountain Bike</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">Tires</th>
+                    <td>$50</td>
+                    <td>$100</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Chains</th>
+                    <td>$35</td>
+                    <td>$35</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Cables/housing</th>
+                    <td>$10</td>
+                    <td>$25</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Suspension Servicing</th>
+                    <td>$0</td>
+                    <td>$300</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Cleats</th>
+                    <td>$20</td>
+                    <td>$20</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Disc brake pads</th>
+                    <td>$20</td>
+                    <td>$100 (requires brake bleeding)</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Miscellaneous consumables</th>
+                    <td>$50</td>
+                    <td>$50</td>
+                  </tr>
+                </tbody>
+              </table>
         </div>
     </div>
 </div>
@@ -51,9 +99,23 @@
     <div class="col-md-12">
         <div class="box1">
             <h2 id="travel-routes-personal-transportation" title="travel-routes-personal-transportation">Travel Routes</h2>
-            <p>Test</p>
+            <p></p>
         </div>
     </div>
 </div>
+
+<button id="myButton" class="btn btn-primary" onclick="myFunction()">Next</button>
+
+<script>
+    function myFunction() {
+        location.href='transit';
+    }
+</script>
+
+<style>
+    button {
+        float: right;
+    }
+</style>
 
 {% endblock %}
