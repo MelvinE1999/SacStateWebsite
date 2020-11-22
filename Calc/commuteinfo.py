@@ -15,8 +15,7 @@ geocode_url = "https://maps.googleapis.com/maps/api/geocode/json?"
 # input: address_or_postalcode, data_type
 # output: returns a distance measured in meters.
 # This method send API request to Google Maps in order to find the distance between a user's address, and the Sacramento State campus.
-def extract_distance(address, data_type = 'json'):
-    destination = "6000 J St, Sacramento, CA"
+def extract_distance(address, destination, data_type = 'json'):
     endpoint = f"https://maps.googleapis.com/maps/api/directions/{data_type}"
     params = {"origin" : address,
               "destination" : destination,
