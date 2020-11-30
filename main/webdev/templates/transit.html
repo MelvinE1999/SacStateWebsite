@@ -1,6 +1,5 @@
 {% extends "layout.html" %}
-{% block content %}
-
+{% block content %}    
 <header class="bg-image-full">   
   <style>
     /* Large devices (laptops/desktops, 992px and up) */
@@ -34,16 +33,15 @@
           <div class="row">
                 <!-- T4 Hero Header --> 
             <div class="col-lg-6">
-              <h1>            Alternative Transportation</h1>
+              <h1>Transit</h1>
               <h2>Parking &amp; Transportation</h2>
             </div>
           </div>
         </div>
-      </header>
+</header>
 
 <!-- T4 Quadrants -->
 <div class="container">
-  <!-- Body Header -->
   <h1 style="margin-top:0.70em">General Information</h1>
   <hr>
   <p><h5>The City of Sacramento offers the Regional Transit for those who are looking for other forms transportation. 
@@ -53,7 +51,6 @@
          for both forms of transportation.</h5></p>
   <h1 style="margin-top:0.70em">Informational Table</h1>
   <hr>
-  <!-- Table -->
     <table class="table table-borderless">
       <tbody>
         <tr>
@@ -83,7 +80,7 @@
         </tr>
         <tr>
           <td style="width: 30%"><h3>Commuter Sleeve Cost</h3></th>
-          <td style="width: 35%"><h4>$40</h4></td>
+          <td style="width: 35%"><h4>None</h4></td>
           <td><h4>$40</h4></td>
         </tr>
         <tr>
@@ -98,7 +95,58 @@
         </tr>
       </tbody>
     </table>
-  <!-- End of Table -->
+  <h1 style="margin-top:0.70em">Transit Versus Other Forms of Transportation</h1>
+  <hr>
+  <p><h5>Transit is not the only form of transportation. Students can also commute via car, biking or walking.
+         The purpose of this table is demonstrate costs, run times, and sustainanility factors for each of the commute options.
+         A more in-depth analysis is provided below the table.
+  </h5></p>
+    <table class="table table-borderless">
+      <tbody>
+        <tr>
+          <td style="width: 30%"></th>
+          <td style="width: 35%"><h2>Transit</h2></td>
+          <td style="width: 35%"><h2>Car</h2></td>
+          <td><h2>Biking/Walking</h2></td>
+        </tr>
+        <tr>
+          <td style="width: 30%"><h3>Permit Cost*</h3></th>
+          <td style="width: 35%"><h4>None</h4></td>
+          <td style="width: 35%"><h4>$7/daily <br></br> $178/semester</h4></td>
+          <td><h4>Free</h4></td>
+        </tr>
+        <tr>
+          <td style="width: 30%"><h3>Annual Cost**</h3></th>
+            <td style="width: 35%"><h4>None</h4></td>
+            <td style="width: 35%"><h4>$7,114 - $10,839</td>
+            <td><h4>$10 - $180 (Bike) <br><br> None (Walking)</h4></td>
+        </tr>
+        <tr>
+          <td style="width: 30%"><h3>Average Run Times***</h3></th>
+          <td style="width: 35%"><h4>~58 mins (Bus) <br><br> ~16 min (Light Rail)</h4></td>
+          <td style="width: 35%"><h4>Dependent on Location</td>
+          <td><h4>Dependent on Location</h4></td>
+        </tr>
+        <tr>
+          <td style="width: 30%"><h3>CO2 Emissions</h3></th>
+          <td style="width: 35%"><h4>37,030g per 30mi</h4></td>
+          <td style="width: 35%"><h4>10,664g per 30mi</h4></td>
+          <td><h4>None</h4></td>
+        </tr>
+      </tbody>
+    </table>
+  <span> <strong>More information: </strong><span>
+    <br>* Parking permits fee:   <a href="https://www.csus.edu/parking-transportation/parking/permit-pricing.html"> Click here</a>
+    <br>** Annual Costs:   <a href="https://newsroom.aaa.com/auto/your-driving-costs/">Cars</a> <a href="https://www.peakadventures.org/prices-services">Bikes</a>
+    <br>*** Average Run Times: An accurate run time for each commute option will be provided towards the end of this presentation. </br>
+  <br>
+  <h1 style="margin-top:0.70em">Overview</h1>
+  <hr>
+  <p><h5>Transit is not the only form of transportation. Students can also commute via car, biking or walking.
+         The purpose of this table is demonstrate costs, run times, and sustainanility factors for each of the commute options.
+         A more in-depth analysis is provided below the table.
+  </h5></p>
+  <a class="btn btn-primary" href="{{ url_for('personal') }}" role="button" style="margin-left: 95%; margin-bottom: 3%;">Next ❯</a>
 </div>
 
 {% endblock %}
