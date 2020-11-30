@@ -1,55 +1,67 @@
 {% extends "layout.html" %}
 {% block content %}
-<header class="bg-image-full">   
+
+<header class="bg-image-full">
     <style>
-      /* Large devices (laptops/desktops, 992px and up) */
-      @media only screen and (min-width: 992px) {
-          .bg-image-full {
-              background-image: linear-gradient(270deg, rgba(196,182,129,0) 50%, rgba(0,78,56,0.6) 50%, rgba(0,78,56,1) 100%), url("{{ url_for('static', filename='images/bus2.jpg') }}"); 
-              background-size: cover;
-          }
-          /* exception for initial campaign page (give / campaign / index ) */
-          main.page-campaign .bg-image-full {
-              background-color: #fff;
-              background-position: center;
-              background-image: url("{{ url_for('static', filename='images/bus2.jpg') }}"); 
-              background-size: cover;
-          }
-      }
-      </style>
-  
-      <style>
+        /* Large devices (laptops/desktops, 992px and up) */
+        @media only screen and (min-width: 992px) {
+            .bg-image-full {
+                background-image: linear-gradient(270deg, rgba(196, 182, 129, 0) 50%, rgba(0, 78, 56, 0.6) 50%, rgba(0, 78, 56, 1) 100%),
+                url("{{ url_for('static', filename='images/bus2.jpg') }}");
+                background-size: cover;
+            }
+
+            /* exception for initial campaign page (give / campaign / index ) */
+            main.page-campaign .bg-image-full {
+                background-color: #fff;
+                background-position: center;
+                background-image: url("{{ url_for('static', filename='images/bus2.jpg') }}");
+                background-size: cover;
+            }
+        }
+    </style>
+
+    <style>
         /* Small devices (991px and down) */
         @media only screen and (max-width: 991px) {
             main:not(.t1) .bg-image-full {
-                 background-image: linear-gradient(270deg, rgba(0,78,56,0.3) 5%, rgba(0,78,56,.6) 100%), url("{{ url_for('static', filename='images/bus2.jpg') }}"); 
+                background-image: linear-gradient(270deg, rgba(0, 78, 56, 0.3) 5%, rgba(0, 78, 56, .6) 100%),
+                url("{{ url_for('static', filename='images/bus2.jpg') }}");
             }
+
             main.t1 .bg-image-full {
-                 background-image: url("{{ url_for('static', filename='images/bus2.jpg') }}"); 
+                background-image: url("{{ url_for('static', filename='images/bus2.jpg') }}");
             }
         }
-        </style>     
-          <div class="container">
-            <div class="row">
-                  <!-- T4 Hero Header --> 
-              <div class="col-lg-6">
+    </style>
+
+    <div class="container">
+        <div class="row">
+            <!-- T4 Hero Header -->
+            <div class="col-lg-6">
                 <h1>Driving</h1>
                 <h2>Parking &amp; Transportation</h2>
-              </div>
             </div>
-          </div>
-  </header>
+        </div>
+    </div>
+</header>
+
 <div class="container">
-    <h1 id="general-information-driving" title="general-information-driving" style="margin-top: 0.70em;">General Information for Driving</h1>
+    <h1 id="general-information-driving" title="general-information-driving" style="margin-top: 0.70em;">General
+        Information for Driving</h1>
     <hr>
-    <span>It’s impossible to look at American commuting habits and not report the obvious: Americans are still largely dependent on the automobile. 
-        Almost 76 percent of Americans drive alone to work every day, while another 8.9 percent carpool with someone else.</span>
+    <span>It’s impossible to look at American commuting habits and not report the obvious: Americans are still largely
+        dependent on the automobile.
+        Almost <strong>76 percent </strong>of Americans drive alone to work every day, while another <strong> 8.9 percent </strong> carpool with someone
+        else.</span>
     <br> </br>
     <span>
-        Considering that ACS counted 150 million workers in 2019, that’s at least 115 million cars and trucks 
-        hitting American streets every day. It’s no wonder congestion is so pervasive during morning and afternoon rush hours.
+        Considering that ACS counted <strong>150 million workers in 2019, that’s at least 115 million cars and trucks
+        hitting American streets every day</strong>. It’s no wonder congestion is so pervasive during morning and afternoon rush
+        hours.
     </span>
     <br> </br>
+
     <body>
         <div id="piechart" style="width: auto; height: 350px;"></div>
     </body>
@@ -57,17 +69,21 @@
 
     <h1 id="travel-time" title="travel-time">Travel Times</h1>
     <hr>
-    <span>A majority of American (62.7%) access their jobs in less than 30 minutes, including teleworkers. 
-    Despite the considerable media attention, only 9.3% are “super-commuters, “who travel for more than an hour one-way to work </span>
+    <span>A majority of American <strong>(62.7%) </strong>access their jobs in less than 30 minutes, including teleworkers.
+        Despite the considerable media attention, only <strong>9.3% </strong>are “super-commuters, “who travel for more than an hour
+        one-way to work. </span>
     <br> </br>
+
     <body>
         <div id="piechartTravel" style="width: auto; height: 350px;"></div>
     </body>
     <br></br>
     <span>
-        Among those accessing work in less than 30 minutes, 75.3% drive alone, 9.1% are teleworkers, 8.3% car pool, 3.8% walk and only 1.4% use transit
+        Among those accessing work in less than 30 minutes, 75.3% drive alone, 9.1% are teleworkers, 8.3% car pool, 3.8%
+        walk and only 1.4% use transit
     </span>
     <br> </br>
+
     <body>
         <div id="piechartJourney30" style="width: auto; height: 350px;"></div>
     </body>
@@ -76,7 +92,9 @@
     <h1 id="commute-to-sac-state" title="commute-to-sac-state">Commute to Sac State</h1>
     <hr>
     <span>
-        Most of Sac State's students reside and work in the city of Sacramento, so they can take about 15-20 mins to get school. However, many other students come from other cities, like Stockton, Manteca, Modesto, Tracy, etc. Therefore, they may take more than 45 mins to commute to Sac State.
+        Most of Sac State's students reside and work in the city of Sacramento, so they can take about 15-20 mins to get
+        school. However, many other students come from other cities, like Stockton, Manteca, Modesto, Tracy, etc.
+        Therefore, they may take more than 45 mins to commute to Sac State.
     </span>
     <br></br>
     <span> <strong>Below is a comparison table of the student's commute</strong></span>
@@ -91,164 +109,187 @@
         </thead>
         <tbody>
             <tr>
-                <td>Parking permit*</td>
+                <td><strong>Parking permit*</strong></td>
                 <td class="text-center"> $7/daily <br></br> $178/semester</td>
                 <td class="text-center"> $7/daily <br></br> $178/semester</td>
             </tr>
             <tr>
-                <td>Ave. Insurance**</td>
+                <td><strong>Ave. Insurance**</strong></td>
                 <td class="text-center"> $120/month <br></br> $1,400/year</td>
                 <td class="text-center"> $137/month <br></br> $1,645/year</td>
-            </tr>	
+            </tr>
 
             <tr>
-                <td>Maintenance***</td>
+                <td><strong>Maintenance***</strong></td>
                 <td class="text-center"> $100-$350/ year </td>
                 <td class="text-center"> ~ $298/ year </td>
             </tr>
             <tr>
-                <td>Average Fuel Consumption</td>
+                <td><strong>Average Fuel Consumption</strong></td>
                 <td class="text-center"> 25.4 MPG</td>
                 <td class="text-center"> 0 </td>
             </tr>
             <tr>
-                <td>Cost****</td>
+                <td><strong>Cost****</strong></td>
                 <td class="text-center"> $16/100 miles</td>
                 <td class="text-center"> $4.40/100 miles </td>
             </tr>
             <tr>
-                <td>CO2 Emissions</td>
+                <td><strong>CO2 Emissions</strong></td>
                 <td class="text-center"> 10,664.4 g/ 30mi</td>
                 <td class="text-center"> 0 (^)</td>
-            </tr>	
+            </tr>
         </tbody>
     </table>
     <span> <strong>More information: </strong><span>
-        <br>* Parking permits fee:   <a href="https://www.csus.edu/parking-transportation/parking/permit-pricing.html"> Click here</a></br>
-        ** Average Cost of Insurance:   <a href="https://www.myev.com/research/buyers-sellers-advice/5-cheapest-evs-to-insure-for-2018#:~:text=About%20average%2C%20according%20to%20a,among%20all%20vehicles%20at%20%241%2C645."> Click here</a>
-        <br>*** Maintenance fee:   <a href="https://www.motor1.com/reviews/406938/tesla-maintenance-cost/"> Click here</a></br>
-        **** Cost:   <a href="https://www.solarreviews.com/blog/how-much-does-it-cost-to-charge-a-tesla-is-it-the-same-as-the-cost-to-charge-other-electric-vehicles"> Click here</a>
-    <br>(^) There are no associated tailpipe emissions with an electric vehicle, but there are vehicle emissions when the vehicle production process is considered.</br>
+            <br>* Parking permits fee: <a
+                href="https://www.csus.edu/parking-transportation/parking/permit-pricing.html"> Click here</a></br>
+            ** Average Cost of Insurance: <a
+                href="https://www.myev.com/research/buyers-sellers-advice/5-cheapest-evs-to-insure-for-2018#:~:text=About%20average%2C%20according%20to%20a,among%20all%20vehicles%20at%20%241%2C645.">
+                Click here</a>
+            <br>*** Maintenance fee: <a href="https://www.motor1.com/reviews/406938/tesla-maintenance-cost/"> Click
+                here</a></br>
+            **** Cost: <a
+                href="https://www.solarreviews.com/blog/how-much-does-it-cost-to-charge-a-tesla-is-it-the-same-as-the-cost-to-charge-other-electric-vehicles">
+                Click here</a>
+            <br>(^) There are no associated tailpipe emissions with an electric vehicle, but there are vehicle emissions
+            when the vehicle production process is considered.</br>
 
 
 
-    <h1 id="parking-direct" title="parking-direct" style="margin-top: 0.80em;">Parking And Directions </h1>
-    <hr>
-    <span>Daily/hourly permits are valid for Student/Daily spaces only during Peak hours (M-F 4:30am-4:30pm during Fall and Spring semesters). 
-        </span>
-        <br></br>
-        <span>After 4:30 p.m., daily permits are also valid in Faculty/Staff spots.</span>
-    <br> </br>
-    <div id="buttoncenter">
-        <input id="button" type="button" onclick="location.href='https://www.csus.edu/administration-business-affairs/hornet-tickets/parking-and-directions.html';" value="More information" />
-    </div>
-    <a class="btn btn-primary" href="{{ url_for('survey') }}" role="button" style="margin-left: 93%; margin-bottom: 3%;">Next ❯</a>
+            <h1 id="parking-direct" title="parking-direct" style="margin-top: 0.80em;">Parking And Directions </h1>
+            <hr>
+            <span>Daily/hourly permits are valid for Student/Daily spaces only during Peak hours (M-F 4:30am-4:30pm
+                during Fall and Spring semesters).
+            </span>
+            <br></br>
+            <span>After 4:30 p.m., daily permits are also valid in Faculty/Staff spots.</span>
+            <br> </br>
+            <div id="buttoncenter">
+                <input id="button" type="button"
+                    onclick="location.href='https://www.csus.edu/administration-business-affairs/hornet-tickets/parking-and-directions.html';"
+                    value="More information" />
+            </div>
+            <br></br>
+
+            <div class="text-center">
+                <div style="margin-right: 50%; display: inline-block;">
+                    <a class="btn btn-primary" href="{{ url_for('home') }}" role="button">❮ Back</a>
+                </div>
+                <div style="margin-left: 20%; display: inline-block;">
+                    <a class="btn btn-primary" href="{{ url_for('personal') }}" role="button">Next ❯</a>
+                </div>
+            </div>
+            <br></br>
 </div>
 
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
-      google.charts.load('current', {'packages':['corechart']});
-      google.charts.setOnLoadCallback(drawChart);
+    google.charts.load('current', { 'packages': ['corechart'] });
+    google.charts.setOnLoadCallback(drawChart);
 
-      function drawChart() {
+    function drawChart() {
         var data = google.visualization.arrayToDataTable([
-		  ['Mode', 'Percentage'],
-			['Drive alone',     75.9],
-			['Carppoled',      8.9],
-			['Public transit',  5.0],
-			['Walked',    2.6],
-			['Worked from home', 5.7],
-			['Other', 1.9]
+            ['Mode', 'Percentage'],
+            ['Drive alone', 75.9],
+            ['Carppoled', 8.9],
+            ['Public transit', 5.0],
+            ['Walked', 2.6],
+            ['Worked from home', 5.7],
+            ['Other', 1.9]
         ]);
 
         var options = {
-          title: 'Share of All Commuters by Mode 2019'
+            title: 'Share of All Commuters by Mode 2019'
         };
 
         var chart = new google.visualization.PieChart(document.getElementById('piechart'));
         chart.draw(data, options);
 
-		var windowResizeTimer;
-		window.addEventListener('resize', function(e){
-    	clearTimeout(windowResizeTimer);
-    	windowResizeTimer = setTimeout(function(){
-        chart.draw(data, options);
-    	}, 100);});
-      }
-	</script>	
-	
-	<script type="text/javascript">
-		google.charts.load('current', {'packages':['corechart']});
-		google.charts.setOnLoadCallback(drawChart);
-  
-		function drawChart() {
-		  var data = google.visualization.arrayToDataTable([
-		  ['Duration', 'Percentage'],
-          ['0 < 30 mins',     62.7],
-          ['30 - 45 mins',      20.0],
-          ['45 - 60 mins',  8.1],
-          ['Over 60 mins',    9.3]
-		  ]);
-  
-		  var options = {
-			title: 'Average One-Way Commute Times 2019'
-		  };
-  
-		  var chart = new google.visualization.PieChart(document.getElementById('piechartTravel'));
-		  chart.draw(data, options);
-  
-		  var windowResizeTimer;
-		  window.addEventListener('resize', function(e){
-		  clearTimeout(windowResizeTimer);
-		  windowResizeTimer = setTimeout(function(){
-		  chart.draw(data, options);
-		  }, 100);});
-		}
-	  </script>	
+        var windowResizeTimer;
+        window.addEventListener('resize', function (e) {
+            clearTimeout(windowResizeTimer);
+            windowResizeTimer = setTimeout(function () {
+                chart.draw(data, options);
+            }, 100);
+        });
+    }
+</script>
 
 <script type="text/javascript">
-	google.charts.load('current', {'packages':['corechart']});
-	google.charts.setOnLoadCallback(drawChart);
+    google.charts.load('current', { 'packages': ['corechart'] });
+    google.charts.setOnLoadCallback(drawChart);
 
-	function drawChart() {
-	  var data = google.visualization.arrayToDataTable([
-	  ['Mode', 'Percentage'],
-			['Drive alone',     75.3],
-			['Carpooled',      8.3],
-			['Public transit',  1.4],
-			['Walked',    3.8],
-			['Worked from home', 9.1],
-			['Other', 2.0]
-	  ]);
+    function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+            ['Duration', 'Percentage'],
+            ['0 < 30 mins', 62.7],
+            ['30 - 45 mins', 20.0],
+            ['45 - 60 mins', 8.1],
+            ['Over 60 mins', 9.3]
+        ]);
 
-	  var options = {
-		title: 'Travel Time < 30 mins: 2019'
-	  };
+        var options = {
+            title: 'Average One-Way Commute Times 2019'
+        };
 
-	  var chart = new google.visualization.PieChart(document.getElementById('piechartJourney30'));
-	  chart.draw(data, options);
+        var chart = new google.visualization.PieChart(document.getElementById('piechartTravel'));
+        chart.draw(data, options);
 
-	  var windowResizeTimer;
-	  window.addEventListener('resize', function(e){
-	  clearTimeout(windowResizeTimer);
-	  windowResizeTimer = setTimeout(function(){
-	  chart.draw(data, options);
-	  }, 100);});
-	}
-  </script>	
-	
+        var windowResizeTimer;
+        window.addEventListener('resize', function (e) {
+            clearTimeout(windowResizeTimer);
+            windowResizeTimer = setTimeout(function () {
+                chart.draw(data, options);
+            }, 100);
+        });
+    }
+</script>
+
+<script type="text/javascript">
+    google.charts.load('current', { 'packages': ['corechart'] });
+    google.charts.setOnLoadCallback(drawChart);
+
+    function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+            ['Mode', 'Percentage'],
+            ['Drive alone', 75.3],
+            ['Carpooled', 8.3],
+            ['Public transit', 1.4],
+            ['Walked', 3.8],
+            ['Worked from home', 9.1],
+            ['Other', 2.0]
+        ]);
+
+        var options = {
+            title: 'Travel Time < 30 mins: 2019'
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechartJourney30'));
+        chart.draw(data, options);
+
+        var windowResizeTimer;
+        window.addEventListener('resize', function (e) {
+            clearTimeout(windowResizeTimer);
+            windowResizeTimer = setTimeout(function () {
+                chart.draw(data, options);
+            }, 100);
+        });
+    }
+</script>
+
 <style>
-	td {
-			max-width: 0;
-			overflow: hidden;
-			text-overflow: ellipsis;
-			white-space: nowrap;
-		}
-	#buttoncenter {
-			text-align: center;
-			display: block;
-			margin: 0 auto;
-		}	
+    td {
+        max-width: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
 
+    #buttoncenter {
+        text-align: center;
+        display: block;
+        margin: 0 auto;
+    }
 </style>
 {% endblock %}
