@@ -1,5 +1,4 @@
 from flask import render_template, url_for, flash, redirect, request, Flask
-from webdev import app
 from flask_wtf import FlaskForm
 from wtforms import BooleanField, PasswordField, SubmitField, TextField, SelectField
 
@@ -29,30 +28,22 @@ app.config['SECRET_KEY'] = 'Secret'
 def home():
     return render_template('home.html')
 
-
-@app.route("/walking", methods=['GET', 'POST'])
-def walking():
-    return render_template('walking.html', title='Walking')
-
-
-@app.route("/bus", methods=['GET', 'POST'])
-def bus():
-    return render_template('bus.html', title='Bus')
+@app.route("/transit", methods=['GET', 'POST'])
+def transit():
+    return render_template('transit.html', title='transit')
 
 
-@app.route("/lightrail", methods=['GET', 'POST'])
-def lightrail():
-    return render_template('lightrail.html', title='Lightrail')
-
-
-@app.route("/biking", methods=['GET', 'POST'])
-def biking():
-    return render_template('biking.html', title='Biking')
-
+@app.route("/personal", methods=['GET', 'POST'])
+def personal():
+    return render_template('personal_transport.html', title='Personal Transport')
 
 @app.route("/driving", methods=['GET', 'POST'])
 def driving():
     return render_template('driving.html', title='Driving')
+
+@app.route("/results", methods=['GET', 'POST'])
+def results():
+    return render_template('results.html', title='Results')
 
 #This route points to the survey that an user will need to fill out
 #input: on this page the user will have to fill out the 5Q survey
