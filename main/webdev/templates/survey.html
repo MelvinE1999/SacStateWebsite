@@ -6,53 +6,63 @@
       <div class="modal-header text-center">
         <h4 class="modal-title w-100 font-weight-bold">Survey</h4>
       </div>
-      <form action="/survey" method="POST">
+      <form action="/results" method="POST">
         <div class="modal-bdoy mx-3">
+
+
           <div class="form-group">
             <label style="margin-top: 0.50em">Enter Your Home Address</label>
-            <input type="text" class="form-control" id="answer1" name="answer1" placeholder="6000 J St, Sacramento, CA 95819">
+            <input type="text" class="form-control" id="Question 1" name="Question 1" placeholder="6000 J St, Sacramento, CA 95819">
           </div>
+
+
           <div class="form-group">
             <label>Question 2</label>
-            <input type="text" class="form-control" id="answer2" name="answer2" placeholder="Question2">
+            <input type="text" class="form-control" id="Question 2" name="Question 2" placeholder="Question2">
           </div>
+
+
           <div class="form-group">
               <label>Primary Choice of Transportation</label>
           </div>
           <div class="form-check">
-            <input class="form-check-input" type="radio" value="Bus" id="Q1Box1" name="Q1Box1">
-            <label class="form-check-label" for="Q1Box1">
+            <input class="form-check-input" type="radio" value="Bus" id="Question 3" name="Question 3">
+            <label class="form-check-label" for="Question 3">
               Transit
             </label>
           </div>
           <div class="form-check">
-            <input class="form-check-input" type="radio" value="car" id="Q1Box1" name="Q1Box1">
-            <label class="form-check-label" for="Q1Box1">
+            <input class="form-check-input" type="radio" value="Car" id="Question 3" name="Question 3">
+            <label class="form-check-label" for="Question 3">
               Car
             </label>
           </div>
           <div class="form-check">
-            <input class="form-check-input" type="radio" value="Walking" id="Q1Box1" name="Q1Box1">
-            <label class="form-check-label" for="Q1Box1">
+            <input class="form-check-input" type="radio" value="Biking/Walking" id="Question 3" name="Question 3">
+            <label class="form-check-label" for="Question 3">
               Biking/Walking
             </label>
           </div>
+
           <br>
           <div class="form-group">
-            <label for="exampleFormControlSelect1">Was This Presentation Helpful?</label>
-            <select class="form-control" id="FormControlSelect">
+            <label for="inlineFormCustomSelect">Was This Presentation Helpful?</label>
+            <select class="form-control" id="Question 4" name="Question 4">
               <option>Choose</option>
               <option>Yes</option>
               <option>No</option>
             </select>
           </div>
           <br>
+
           <div class="form-group">
             <label for="exampleFormControlTextarea1">Comments or Questions</label>
-            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+            <textarea class="form-control" id="Question 4" name="Question 5"rows="3"></textarea>
           </div>
+
+
         </div>
-        <a class="btn btn-primary" href="{{ url_for('results') }}" role="button" style="margin-top: 2em; margin-bottom: 1em; margin-left: 14em;">Submit</a>
+        <button type="submit" class="btn btn-primary" style="margin-top: 2em; margin-bottom: 1em; margin-left: 14em;">Sign up</button>
 
         {% if feedback %}
         <p class="text-danger float-right">{{ feedback }}</p>
