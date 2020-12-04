@@ -43,15 +43,8 @@ def driving():
 
 @app.route("/results", methods=['GET', 'POST'])
 def results():
-    return render_template('results.html', title='Results')
-
-#This route points to the survey that an user will need to fill out
-#input: on this page the user will have to fill out the 5Q survey
-#output: The data from question 1 will be used to calculate routes
-#        The rest will just be sent to a database as set by client
-@app.route("/survey", methods=["GET", "POST"])
-def survey():
-    if request.method == "POST":
+    
+        if request.method == "POST":
         req = request.form
 
         missing = list()
@@ -65,18 +58,35 @@ def survey():
             feedback = f"Missing fields for {', '.join(missing)}"
             return render_template("/survey.html", feedback=feedback)
 
-        answer1 = request.form.get("answer1")
-        answer2 = request.form.get("Q1Box1")
-        answer3 = request.form.get("Select1")
+        answer1 = request.form.get("Question 1")
+        answer2 = request.form.get("Question 2")
+        answer3 = request.form.get("Question 3")
+        answer4 = request.form.get("Question 4")
+        answer5 = request.form.get("Question 5")
+
 
 
         file = open("data.txt", "w+")
-        file.write("\nanswer1 " + answer1 + "\nanswer2: " + answer2 + "\nanswer3: " + answer3 + "\n")
+        file.write("\nanswer1 " + answer1)
+        file.write("\nanswer2 " + answer2)
+        file.write("\nanswer3 " + answer3)
+        file.write("\nanswer4 " + answer4)
+        file.write("\nanswer5 " + answer5)
 
         file.close()
 
         return redirect(request.url)
 
+    
+    return render_template('results.html', title='Results')
+
+#This route points to the survey that an user will need to fill out
+#input: on this page the user will have to fill out the 5Q survey
+#output: The data from question 1 will be used to calculate routes
+#        The rest will just be sent to a database as set by client
+@app.route("/survey", methods=["GET", "POST"])
+def survey():
+if request.method == "POST":
     return render_template("/survey.html")
 
 
