@@ -45,37 +45,37 @@ def driving():
 def results():
     
         if request.method == "POST":
-        req = request.form
+            req = request.form
 
-        missing = list()
+            missing = list()
 
-        #doesnt provide feedback if missing checkbox
-        for k, v in req.items():
-            if v == "" or v == "Choose...":
-                missing.append(k)
+            #doesnt provide feedback if missing checkbox
+            for k, v in req.items():
+                if v == "" or v == "Choose...":
+                    missing.append(k)
 
-        if missing:
-            feedback = f"Missing fields for {', '.join(missing)}"
-            return render_template("/survey.html", feedback=feedback)
+            if missing:
+                feedback = f"Missing fields for {', '.join(missing)}"
+                return render_template("/survey.html", feedback=feedback)
 
-        answer1 = request.form.get("Question 1")
-        answer2 = request.form.get("Question 2")
-        answer3 = request.form.get("Question 3")
-        answer4 = request.form.get("Question 4")
-        answer5 = request.form.get("Question 5")
+            answer1 = request.form.get("Question 1")
+            answer2 = request.form.get("Question 2")
+            answer3 = request.form.get("Question 3")
+            answer4 = request.form.get("Question 4")
+            answer5 = request.form.get("Question 5")
 
 
 
-        file = open("data.txt", "w+")
-        file.write("\nanswer1 " + answer1)
-        file.write("\nanswer2 " + answer2)
-        file.write("\nanswer3 " + answer3)
-        file.write("\nanswer4 " + answer4)
-        file.write("\nanswer5 " + answer5)
+            file = open("data.txt", "w+")
+            file.write("\nanswer1 " + answer1)
+            file.write("\nanswer2 " + answer2)
+            file.write("\nanswer3 " + answer3)
+            file.write("\nanswer4 " + answer4)
+            file.write("\nanswer5 " + answer5)
 
-        file.close()
+            file.close()
 
-        return redirect(request.url)
+            return redirect(request.url)
 
     
     return render_template('results.html', title='Results')
@@ -86,7 +86,6 @@ def results():
 #        The rest will just be sent to a database as set by client
 @app.route("/survey", methods=["GET", "POST"])
 def survey():
-if request.method == "POST":
     return render_template("/survey.html")
 
 
