@@ -1,328 +1,349 @@
 {% extends "layout.html" %}
 {% block content %}
 
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <script src="extensions/resizable/bootstrap-table-resizable.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script
-	src="//maps.googleapis.com/maps/api/js?key=AIzaSyD_OmfV6R80tXkuh-BgApuG8XjXILmrkrw&callback=initMap&libraries=places"
-	type="text/javascript"></script>
+    src="//maps.googleapis.com/maps/api/js?key=AIzaSyD_OmfV6R80tXkuh-BgApuG8XjXILmrkrw&callback=initMap&libraries=places"
+    type="text/javascript"></script>
 
 
 <header class="bg-image-full">
-	<style>
-		/* Large devices (laptops/desktops, 992px and up) */
-		@media only screen and (min-width: 992px) {
-			.bg-image-full {
-				background-image: linear-gradient(270deg, rgba(196, 182, 129, 0) 50%, rgba(0, 78, 56, 0.6) 50%, rgba(0, 78, 56, 1) 100%),
-				url("{{ url_for('static', filename='images/parking.jpg') }}");
-				background-size: cover;
-			}
+    <style>
+        /* Large devices (laptops/desktops, 992px and up) */
+        @media only screen and (min-width: 992px) {
+            .bg-image-full {
+                background-image: linear-gradient(270deg, rgba(196, 182, 129, 0) 50%, rgba(0, 78, 56, 0.6) 50%, rgba(0, 78, 56, 1) 100%),
+                url("{{ url_for('static', filename='images/parking.jpg') }}");
+                background-size: cover;
+            }
 
-			/* exception for initial campaign page (give / campaign / index ) */
-			main.page-campaign .bg-image-full {
-				background-color: #fff;
-				background-position: center;
-				background-image: url("{{ url_for('static', filename='images/parking.jpg') }}");
-				background-size: cover;
-			}
-		}
-	</style>
+            /* exception for initial campaign page (give / campaign / index ) */
+            main.page-campaign .bg-image-full {
+                background-color: #fff;
+                background-position: center;
+                background-image: url("{{ url_for('static', filename='images/parking.jpg') }}");
+                background-size: cover;
+            }
+        }
+    </style>
 
-	<style>
-		/* Small devices (991px and down) */
-		@media only screen and (max-width: 991px) {
-			main:not(.t1) .bg-image-full {
-				background-image: linear-gradient(270deg, rgba(0, 78, 56, 0.3) 5%, rgba(0, 78, 56, .6) 100%),
-				url("{{ url_for('static', filename='images/parking.jpg') }}");
-			}
+    <style>
+        /* Small devices (991px and down) */
+        @media only screen and (max-width: 991px) {
+            main:not(.t1) .bg-image-full {
+                background-image: linear-gradient(270deg, rgba(0, 78, 56, 0.3) 5%, rgba(0, 78, 56, .6) 100%),
+                url("{{ url_for('static', filename='images/parking.jpg') }}");
+            }
 
-			main.t1 .bg-image-full {
-				background-image: url("{{ url_for('static', filename='images/parking.jpg') }}");
-			}
-		}
-	</style>
-	<style>
-		.th {
-			text-align: center;
-		}
+            main.t1 .bg-image-full {
+                background-image: url("{{ url_for('static', filename='images/parking.jpg') }}");
+            }
+        }
+    </style>
+    <style>
+        .th {
+            text-align: center;
+        }
 
-		.scroller {
-			width: 500px;
-			height: 520px;
-			overflow-y: scroll;
-			scrollbar-width: none;
-		}
+        .scroller {
+            width: 40%;
+            height: 410px;
+            overflow-y: scroll;
+            scrollbar-width: none;
+            padding: 20px;
+        }
 
-		.results_info {
-			max-width: 1100px;
-			margin: 50px auto;
-			position: relative;
-			padding: 30px;
-		}
+        .results_info {
+            max-width: 1100px;
+            margin: 50px auto;
+            position: relative;
+            padding: 30px;
+        }
 
-		.contact-form .form-group {
-			position: relative;
-			margin: 5px 0;
-		}
+        .contact-form .form-group {
+            position: relative;
+            margin: 5px 0;
+        }
 
-		.contact-form .input-text {
-			display: block;
-			width: 100%;
-			height: 36px;
-		}
+        .contact-form .input-text {
+            display: block;
+            width: 100%;
+            height: 36px;
+        }
 
-		.driving_box .input-text-driving {
-			display: block;
-			width: 40%;
-			height: 36px;
+        .driving_box .input-text-driving {
+            display: block;
+            width: 40%;
+            height: 36px;
 
-		}
+        }
 
-		.driving_box .fuell_align {
-			margin-left: 6%;
-		}
+        .driving_box .fuell_align {
+            margin-left: 6%;
+        }
 
-		.table_option {
-			max-width: 900px;
-			margin: 50px auto;
-			position: relative;
-		}
-	</style>
+        .table_option {
+            max-width: 900px;
+            margin: 50px auto;
+            position: relative;
+        }
+
+        .map_show {
+            width: 60%;
+            height: 400px;
+            padding: 20px;
+            float: left;
+        }
+
+        @media screen and (max-width: 800px) {
+
+            .map_show,
+            .scroller {
+                width: 100%;
+                /* The width is 100%, when the viewport is 800px or smaller */
+            }
+        }
+    </style>
 </header>
 <script type="text/javascript">
-	var routeArr = [];
-	var globalResponse;
-	var source, destination;
-	var gas;
-	var price;
-	var darection = new google.maps.DirectionsRenderer;
-	var directionsService = new google.maps.DirectionsService;
-	google.maps.event.addDomListener(window, 'load', function () {
-		new google.maps.places.SearchBox(document.getElementById('source'));
-		new google.maps.places.SearchBox(document.getElementById('destination'));
+    var routeArr = [];
+    var globalResponse;
+    var source, destination;
+    var gas;
+    var price;
+    var darection = new google.maps.DirectionsRenderer;
+    var directionsService = new google.maps.DirectionsService;
+    google.maps.event.addDomListener(window, 'load', function () {
+        new google.maps.places.SearchBox(document.getElementById('source'));
+        new google.maps.places.SearchBox(document.getElementById('destination'));
 
-	});
+    });
 
-	function get_rout() {
-		var mapOptions = {
-			mapTypeControl: false,
-			center: { lat: -100.8688, lng: 151.2195 },
-			zoom: 20
-		};
+    function get_clear() {
+        document.getElementById("source").value = "";
+        document.getElementById("gasConsumption").value = 25;
+        document.getElementById("theCost").value = 2.5
+    }
 
-		map = new google.maps.Map(document.getElementById('maplocation'), mapOptions);
-		darection.setMap(map);
-		darection.setPanel(document.getElementById('panallocation'));
+    function get_rout() {
+        var mapOptions = {
+            mapTypeControl: false,
+            center: { lat: -100.8688, lng: 151.2195 },
+            zoom: 20
+        };
 
-		//*********DIRECTIONS AND ROUTE**********************//
-		source = document.getElementById("source").value;
-		destination = document.getElementById("destination").value;
+        map = new google.maps.Map(document.getElementById('maplocation'), mapOptions);
+        darection.setMap(map);
+        darection.setPanel(document.getElementById('panallocation'));
 
-		var request = {
-			origin: source,
-			destination: destination,
-			provideRouteAlternatives: true, //Options for directions
-			travelMode: document.getElementById('mode').value,   //Mode for transportation
-		};
-		directionsService.route(request, function (response, status) {
-			if (status == google.maps.DirectionsStatus.OK) {
-				for (var i = 0; i < response.routes.length; i++) {
-					darection.setDirections(response);
-					darection.setRouteIndex(i);
-					darection.setMap(map);
-				}
+        //*********DIRECTIONS AND ROUTE**********************//
+        source = document.getElementById("source").value;
+        destination = document.getElementById("destination").value;
 
-				globalResponse = response;
-				routeArr = [];
-				for (i = 0; i < globalResponse.routes.length; i++) {
-					routeArr.push([globalResponse.routes[i].legs[0].distance.text, globalResponse.routes[i].legs[0].duration.text]);
-				}
-				var s = '<br></br><strong> Possible routes are: </strong><br/>';
-				var integer;
-				var gasNumber = document.getElementById("gasConsumption").value;
-				var cost = document.getElementById("theCost").value;
+        var request = {
+            origin: source,
+            destination: destination,
+            provideRouteAlternatives: true, //Options for directions
+            travelMode: document.getElementById('mode').value,   //Mode for transportation
+        };
+        directionsService.route(request, function (response, status) {
+            if (status == google.maps.DirectionsStatus.OK) {
+                for (var i = 0; i < response.routes.length; i++) {
+                    darection.setDirections(response);
+                    darection.setRouteIndex(i);
+                    darection.setMap(map);
+                }
 
-				var gas;
-				var price;
-				var co2emission;
+                globalResponse = response;
+                routeArr = [];
+                for (i = 0; i < globalResponse.routes.length; i++) {
+                    routeArr.push([globalResponse.routes[i].legs[0].distance.text, globalResponse.routes[i].legs[0].duration.text]);
+                }
+                var s = '<br></br><strong> Possible routes are: </strong><br/>';
+                var integer;
+                var gasNumber = document.getElementById("gasConsumption").value;
+                var cost = document.getElementById("theCost").value;
 
-				var fuel_economy_bus = 7.2; //Average = 7.2 MPG
-				var co2emission_bus;
-				var gas_bus;
+                var gas;
+                var price;
+                var co2emission;
 
-				s += "<table class='table table-striped table-bordered table-resizable' style='width:100%'>";
-				s += "<tr> <th style='width:50PX'> OPTIONS </th> <th style='text-align:center'> DISTANCE </th>";
-				s += "<th style='text-align:center'>  DURATION</th> <th style='text-align:center'> GAS CONSUMPTION </th> <th style='text-align:center'>COST </th> <th style='text-align:center'> CO2 EMISSION </th></tr>";
+                var fuel_economy_bus = 7.2; //Average = 7.2 MPG
+                var co2emission_bus;
+                var gas_bus;
 
-
-
-				for (i = 0; i < routeArr.length; ++i) {
-					//for Driving
-					integer = parseFloat(routeArr[i][0]);
-					gas = (integer / gasNumber).toFixed(2)
-					price = gas * cost;
-					co2emission = 8887 / gasNumber * integer;
-
-					//for bus
-					co2emission_bus = 8887 / fuel_economy_bus * integer;
-					gas_bus = (integer / 3.26).toFixed(2);
-
-
-					if (document.getElementById('mode').value == "WALKING" || document.getElementById('mode').value == "BICYCLING") {
-						s += "<tr> <td style='text-align:center'> " + [i + 1] + " </td> <td style='text-align:center'>" + routeArr[i][0] + "</td>"
-						s += "<td style='text-align:center'>" + routeArr[i][1] + "</td> <td style='text-align:center'> 0 </td> <td style='text-align:center'> 0 </td><td style='text-align:center'> 0 </td></tr>"
-					}
-
-					else if (document.getElementById('mode').value == "DRIVING") {
-						s += "<tr> <td style='text-align:center'> " + [i + 1] + " </td> <td style='text-align:center'>" + routeArr[i][0] + "</td>"
-						s += "<td style='text-align:center'>" + routeArr[i][1] + "</td> <td style='text-align:center'>" + gas + " Gallons</td> <td style='text-align:center'>$" + price.toFixed(2) + "</td><td style='text-align:center'>" + co2emission.toFixed(2) + " grams</td></tr>"
-					}
-					else if (document.getElementById('mode').value == "TRANSIT") {
-						s += "<tr> <td style='text-align:center'> " + [i + 1] + " </td> <td style='text-align:center'>" + routeArr[i][0] + "</td>"
-						s += "<td style='text-align:center'>" + routeArr[i][1] + "</td> <td style='text-align:center'>" + gas_bus + " Gallons</td> <td style='text-align:center'> --- </td><td style='text-align:center'>" + co2emission_bus.toFixed(2) + " grams</td></tr>"
-
-					}
-				}
-
-				s += "</table>"
-				if (document.getElementById('mode').value == "TRANSIT") {
-					s += "<br><span>Note: According to U.S Department of Engergy, <strong> the average Transit Bus consumes 3.26 MPG </strong> -";
-					s += "<a href='https://afdc.energy.gov/data/10310'> More information</a>";
-					s += "<br><span>For the COST, please <a href='http://www.sacrt.com/fares/'> CLICK HERE</a> to get information of <strong> Daily Pass and discount for student </strong></span></br>";
-					s += "<br></br>"
-				}
-
-
-				document.getElementById("dvDistance").innerHTML = s;
-				darection.setDirections(response);
-			}
+                s += "<div style='overflow-x:auto;'>";
+                s += "<table class='table table-striped table-bordered table-resizable' style='width:100%'>";
+                s += "<tr> <th style='width:50PX'> OPTIONS </th> <th style='text-align:center'> DISTANCE </th>";
+                s += "<th style='text-align:center'>  DURATION</th> <th style='text-align:center'> GAS CONSUMPTION </th> <th style='text-align:center'>COST </th> <th style='text-align:center'> CO2 EMISSION </th></tr>";
 
 
 
-			// Here's the AJAX request
-			var httpRequest;
-			if (window.XMLHttpRequest) { // Mozilla, Safari, IE7+ ...
-				httpRequest = new XMLHttpRequest();
-			} else if (window.ActiveXObject) { // IE 6 and older
-				httpRequest = new ActiveXObject("Microsoft.XMLHTTP");
-			}
-			httpRequest.onreadystatechange = function () {                           // here the function name that is designed to handle the response
-				if (httpRequest.readyState == 4 && httpRequest.status == 200) {          //200 OK response code. // 4 is complete response received
-					alert(httpRequest.responseText);
-				}
-			};
-			//httpRequest.open("POST", "mapdb.php", true);       // here true means asynchronously server is called,i.e,without page reloading
-			httpRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-			httpRequest.send("source=" + source + "&destination=" + destination + "&routes=" + JSON.stringify(routeArr));
+                for (i = 0; i < routeArr.length; ++i) {
+                    //for Driving
+                    var string = routeArr[i][0];
+                    string = string.replace(/[^\d\.\-]/g, ""); //Fixed number that is over 1,000 with comma by removing comma
 
-		});
+                    integer = parseFloat(string).toFixed(2);
+
+                    gas = (integer / gasNumber).toFixed(2);
+
+                    price = gas * cost;
+                    co2emission = 8887 / gasNumber * integer;
+
+                    //for bus
+                    co2emission_bus = 8887 / fuel_economy_bus * integer;
+                    gas_bus = (integer / 3.26).toFixed(2);
 
 
-		//*********DISTANCE AND DURATION**********************//
-		var service = new google.maps.DistanceMatrixService();
-		service.getDistanceMatrix({
-			origins: [source],
-			destinations: [destination],
-			travelMode: google.maps.TravelMode.DRIVING,
-			unitSystem: google.maps.UnitSystem.METRIC,
-			avoidHighways: false,
-			avoidTolls: false
-		}, function (response, status) {
-			if (status == google.maps.DistanceMatrixStatus.OK && response.rows[0].elements[0].status != "ZERO_RESULTS") {
-				var distance = globalResponse.rows[0].elements[0].distance.text;    //  Distance Calculation From data provide by APIs
-				var duration = globalResponse.rows[0].elements[0].duration.text;      //  Duration Calculation From data provide by APIs
-				var distance = globalResponse.routes[0].legs[0].distance.text;
-				var duration = globalResponse.routes[0].legs[0].duration.text;
-				var dvDistance = document.getElementById("dvDistance");         // This Variable is for Fetching the Routes distance and displaying it on web page.
+                    if (document.getElementById('mode').value == "WALKING" || document.getElementById('mode').value == "BICYCLING") {
+                        s += "<tr> <td style='text-align:center'> " + [i + 1] + " </td> <td style='text-align:center'>" + routeArr[i][0] + "</td>"
+                        s += "<td style='text-align:center'>" + routeArr[i][1] + "</td> <td style='text-align:center'> 0 </td> <td style='text-align:center'> 0 </td><td style='text-align:center'> 0 </td></tr>"
+                    }
 
-				dvDistance.innerHTML = "";
-				dvDistance.innerHTML += "Distance: " + distance + "<br />";
-				dvDistance.innerHTML += "Duration:" + duration;
+                    else if (document.getElementById('mode').value == "DRIVING") {
+                        s += "<tr> <td style='text-align:center'> " + [i + 1] + " </td> <td style='text-align:center'>" + routeArr[i][0] + "</td>"
+                        s += "<td style='text-align:center'>" + routeArr[i][1] + "</td> <td style='text-align:center'>" + gas + " Gallons</td> <td style='text-align:center'>$" + price.toFixed(2) + "</td><td style='text-align:center'>" + co2emission.toFixed(2) + " grams</td></tr>"
+                    }
+                    else if (document.getElementById('mode').value == "TRANSIT") {
+                        s += "<tr> <td style='text-align:center'> " + [i + 1] + " </td> <td style='text-align:center'>" + routeArr[i][0] + "</td>"
+                        s += "<td style='text-align:center'>" + routeArr[i][1] + "</td> <td style='text-align:center'>" + gas_bus + " Gallons</td> <td style='text-align:center'> --- </td><td style='text-align:center'>" + co2emission_bus.toFixed(2) + " grams</td></tr>"
 
-			}
-		});
-	}
+                    }
+                }
+
+                s += "</table>";
+                s += "</div";
+                if (document.getElementById('mode').value == "TRANSIT") {
+                    s += "<br><span>Note: According to U.S Department of Engergy, <strong> the average Transit Bus consumes 3.26 MPG </strong> -";
+                    s += "<a href='https://afdc.energy.gov/data/10310'> More information</a>";
+                    s += "<br><span>For the COST, please <a href='http://www.sacrt.com/fares/'> CLICK HERE</a> to get information of <strong> Daily Pass and discount for student </strong></span></br>";
+                    s += "<br></br>"
+                }
+
+
+                document.getElementById("dvDistance").innerHTML = s;
+                darection.setDirections(response);
+            }
+
+
+
+            // Here's the AJAX request
+            var httpRequest;
+            if (window.XMLHttpRequest) { // Mozilla, Safari, IE7+ ...
+                httpRequest = new XMLHttpRequest();
+            } else if (window.ActiveXObject) { // IE 6 and older
+                httpRequest = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            httpRequest.onreadystatechange = function () {                           // here the function name that is designed to handle the response
+                if (httpRequest.readyState == 4 && httpRequest.status == 200) {          //200 OK response code. // 4 is complete response received
+                    alert(httpRequest.responseText);
+                }
+            };
+            //httpRequest.open("POST", "mapdb.php", true);       // here true means asynchronously server is called,i.e,without page reloading
+            httpRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            httpRequest.send("source=" + source + "&destination=" + destination + "&routes=" + JSON.stringify(routeArr));
+
+        });
+
+
+        //*********DISTANCE AND DURATION**********************//
+        var service = new google.maps.DistanceMatrixService();
+        service.getDistanceMatrix({
+            origins: [source],
+            destinations: [destination],
+            travelMode: google.maps.TravelMode.DRIVING,
+            unitSystem: google.maps.UnitSystem.METRIC,
+            avoidHighways: false,
+            avoidTolls: false
+        }, function (response, status) {
+            if (status == google.maps.DistanceMatrixStatus.OK && response.rows[0].elements[0].status != "ZERO_RESULTS") {
+                var distance = globalResponse.rows[0].elements[0].distance.text;    //  Distance Calculation From data provide by APIs
+                var duration = globalResponse.rows[0].elements[0].duration.text;      //  Duration Calculation From data provide by APIs
+                var distance = globalResponse.routes[0].legs[0].distance.text;
+                var duration = globalResponse.routes[0].legs[0].duration.text;
+                var dvDistance = document.getElementById("dvDistance");         // This Variable is for Fetching the Routes distance and displaying it on web page.
+
+                dvDistance.innerHTML = "";
+                dvDistance.innerHTML += "Distance: " + distance + "<br />";
+                dvDistance.innerHTML += "Duration:" + duration;
+
+            }
+        });
+    }
+
+    $(document).ready(function () {
+        $("select").change(function () {
+            $("select option:selected").each(function () {
+                if ($(this).attr("value") == "DRIVING") {
+                    $(".driving_box").show();
+                }
+                else {
+                    $(".driving_box").hide();
+                }
+            });
+        }).change();
+    });
 </script>
 
-<!--This function for hide/show MPG abd $-->
-<script>
-	$(document).ready(function () {
-		$("select").change(function () {
-			$("select option:selected").each(function () {
-				if ($(this).attr("value") == "DRIVING") {
-					$(".driving_box").show();
-				}
-				else {
-					$(".driving_box").hide();
-				}
-			});
-		}).change();
-	});
-</script>
-
-<br></br>
 <section class="results_info">
-	<div class="container">
-		<div class="contact-form row">
-			<div class="form-group col-md-6">
-				<label>Enter A Home Address:</label><br>
-				<input type="text" class="input-text" id="source" value="Stockton, CA">
-			</div>
-			<div class="form-group col-md-6">
-				<label>Enter a Destination:</label><br>
-				<input type="text" class="input-text" id="destination" value="6000 J St, Sacramento, CA 95819">
-			</div>
-			<div class="form-group col-md-6">
-				<label>Choose a Form of Transportation:</label>
-				<select id="mode" style="width: 100%;">
-					<option value="DRIVING">DRIVING</option>
-					<option value="WALKING">WALKING</option>
-					<option value="BICYCLING">BICYCLING</option>
-					<option value="TRANSIT">TRANSIT</option>
-				</select>
-			</div>
+    <div class="container">
+        <div class="contact-form row">
+            <div class="form-group col-md-6">
+                <label>Enter A Home Address:</label><br>
+                <input type="text" class="input-text" id="source" value="Stockton, CA">
+            </div>
+            <div class="form-group col-md-6">
+                <label>Enter a Destination:</label><br>
+                <input type="text" class="input-text" id="destination" value="6000 J St, Sacramento, CA 95819">
+            </div>
+            <div class="form-group col-md-6">
+                <label>Choose a Form of Transportation:</label>
+                <select id="mode" style="width: 100%;">
+                    <option value="DRIVING">DRIVING</option>
+                    <option value="WALKING">WALKING</option>
+                    <option value="BICYCLING">BICYCLING</option>
+                    <option value="TRANSIT">TRANSIT</option>
+                </select>
+            </div>
 
-		</div>
+        </div>
 
-		<!--This area for option of transportation-->
-		<div class="container">
-			<div class="driving_box row">
-				<div class="form-group">
-					<label>Gas Consumption (MPG):</label>
-					<input id="gasConsumption" class="input-text-driving" type="number" step="0.1" value="25">
-				</div>
+        <!--This area for option of transportation-->
+        <div class="container">
+            <div class="driving_box row">
+                <div class="form-group">
+                    <label>Gas Consumption (MPG):</label>
+                    <input id="gasConsumption" class="input-text-driving" type="number" step="0.1" value="25">
+                </div>
 
-				<div class="form-group fuell_align">
-					<label class="Fuel_align">Fuel Price ($):</label>
-					<input id="theCost" type="number" class="input-text-driving" step="0.1" value="2.5">
-				</div>
-			</div>
-		</div>
-		<br></br>
-		<!--Button for getting routes-->
-		<div style="text-align: center;">
-			<button type="submit" value="Get Route" onclick="get_rout()"> Get Rout &
-				Distance</button>
-		</div>
-		<div style="text-align: center;" id="dvDistance"></div>
+                <div class="form-group fuell_align">
+                    <label class="Fuel_align">Fuel Price ($):</label>
+                    <input id="theCost" type="number" class="input-text-driving" step="0.1" value="2.5">
+                </div>
+            </div>
+        </div>
+        <br></br>
+        <!--Button for getting routes-->
+        <div style="text-align: center;">
+            <button type="submit" value="Get Route" onclick="get_rout()"> Get Route & Distance</button> &nbsp
+            <button type="submit" value="Get Clear" onclick="get_clear()"> Clear</button> &nbsp
+            <button type=button onClick="parent.location='https://commuteoptions.herokuapp.com/home'">Home</button>
 
-		<table style="text-align: center;">
-			<tr>
-				<td>
-					<div class="form-group input-text" id='maplocation' style="width: 500px; height: 500px"></div>
-				</td>
-				<td>
-					<div class='scroller' id='panallocation'></div>
-				</td>
-			</tr>
-		</table>
+        </div>
+        <div style="text-align: center;" id="dvDistance"></div>
+
+        <div class="container">
+            <div class="map_show" id='maplocation'></div>
+            <div class='scroller' id='panallocation'></div>
+        </div>
 </section>
-
 <div class="row" style="text-align: center;">
-	<br /><br />
-	<div class='col-md-6' id='maplocation' style="width: auto; height: auto"></div>
-	<div class='col-md-6' id='panallocation'></div>
-	<div class='col-md-6' id='gasConsumption' style="width:200px"></div>
+    <br /><br />
+    <div class='col-md-6' id='gasConsumption' style="width:200px"></div>
 </div>
 
 {% endblock %}
