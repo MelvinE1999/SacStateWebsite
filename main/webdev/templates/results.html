@@ -82,7 +82,7 @@
         }
 
         .driving_box .fuell_align {
-            margin-left: 6%;
+            margin-left: 0%;
         }
 
         .table_option {
@@ -125,7 +125,7 @@
     function get_clear() {
         document.getElementById("source").value = "";
         document.getElementById("gasConsumption").value = 25;
-        document.getElementById("theCost").value = 2.5
+        document.getElementById("theCost").value = 2.5;
     }
 
     function get_rout() {
@@ -316,7 +316,7 @@
         <div class="container">
             <div class="driving_box row">
                 <div class="form-group">
-                    <label>Gas Consumption (MPG):</label>
+                    <label>Gas Comsumption:</label>
                     <input id="gasConsumption" class="input-text-driving" type="number" step="0.1" value="25">
                 </div>
 
@@ -341,9 +341,5 @@
             <div class='scroller' id='panallocation'></div>
         </div>
 </section>
-<div class="row" style="text-align: center;">
-    <br /><br />
-    <div class='col-md-6' id='gasConsumption' style="width:200px"></div>
-</div>
 
 {% endblock %}
